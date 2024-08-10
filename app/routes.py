@@ -26,6 +26,10 @@ def register():
     db.session.add(new_user)
     db.session.commit()
     
+    initial_progress = Progress(user_id=new_user.id)
+    db.session.add(initial_progress)
+    db.session.commit()
+    
     return jsonify({'message': 'User created successfully', 'user_id': new_user.id}), 201
 
 
@@ -66,7 +70,12 @@ def get_question():
         return jsonify({'error': 'Invalid user ID'}), 400
     
     # get the difficulty level from the Progress model
-    level = db.session.query(Progress).get(user_id).level
+    progress = db.session.query(Progress).get(user_id)
+    
+    if not progress:
+        return jsonify({'error': 'User not found'}), 404
+    
+    level = progress.level
     
     #check if the level is valid
     if not level:
