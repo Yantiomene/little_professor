@@ -70,7 +70,7 @@ def get_question():
         return jsonify({'error': 'Invalid user ID'}), 400
     
     # get the difficulty level from the Progress model
-    progress = db.session.query(Progress).get(user_id)
+    progress = db.session.get(Progress, user_id)
     
     if not progress:
         return jsonify({'error': 'User not found'}), 404
@@ -95,6 +95,15 @@ def submit_answer():
     user_answer = data.get('answer')
     problem = data.get('problem')
     
+    if not user_id or user_answer is None or not problem:
+        return jsonify({'error': 'Invalid data'}), 400
+    
+    
+    # check if the user ID is valid
+    user = db.session.get(User, user_id)
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+    
     # evaluate the problem to get the correct answer
     correct_answer = eval(problem)
     
@@ -106,17 +115,17 @@ def submit_answer():
     
     # check if the user's answer is correct and update the Progress model
     if user_answer == correct_answer:
-        progress = db.session.query(Progress).get(user_id)
+        progress = db.session.get(Progress, user_id)
         progress.correct_answers += 1
         
         # Update the level if the user has answered 10 questions correctly
         if progress.correct_answers % 10 == 0 and progress.correct_answers > 0:
-            progress.level += 1
+            progress.level = min(4, progress.level + 1)
         
         db.session.commit()
         return jsonify({'message': 'Correct!', 'correct_answer': correct_answer})
     else:
-        progress = db.session.query(Progress).get(user_id)
+        progress = db.session.get(Progress, user_id)
         progress.incorrect_answers += 1
         
         # Update the level if the user has answered 5 questions incorrectly
