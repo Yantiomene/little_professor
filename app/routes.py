@@ -1,13 +1,57 @@
 from flask import Blueprint, jsonify, request
-from app.models import Progress
+from app.models import Progress, User
 from app import db
 from app.utils import generate_problem
+from flask_login import login_required, current_user, login_user, logout_user
 
 bp = Blueprint('main', __name__)
 
 @bp.route('/')
 def index():
     return 'Welcome to Litlle Professor Game!'
+
+
+# endpoint to register a new user
+@bp.route('/register', methods=['POST'])
+def register():
+    data = request.get_json()
+    username = data.get('username')
+    
+    # check if the username is already taken
+    if db.session.query(User).filter_by(username=username).first():
+        return jsonify({'error': 'Username already taken'}), 400
+    
+    # create a new user and add it to the database
+    new_user = User(username=username)
+    db.session.add(new_user)
+    db.session.commit()
+    
+    return jsonify({'message': 'User created successfully', 'user_id': new_user.id}), 201
+
+
+# Endpoint to login a user
+@bp.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    username = data.get('username')
+    
+    # check if the user exists
+    user = db.session.query(User).filter_by(username=username).first()
+    
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+    
+    login_user(user)
+    
+    return jsonify({'message': 'User logged in successfully', 'user_id': user.id})
+
+
+# Endpoint to logout a user
+@bp.route('/logout', methods=['POST'])
+@login_required
+def logout():
+    logout_user()
+    return jsonify({'message': 'User logged out successfully'})
 
 
 # endpoint to get a new math problem
