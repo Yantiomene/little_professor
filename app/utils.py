@@ -13,12 +13,21 @@ difficulty_levels = {
 def generate_problem(level):
     config = difficulty_levels[level]
     num1 = random.randint(config['min'], config['max'])
-    num2 = random.randint(num1, config['max'])
+    num2 = random.randint(config['min'], config['max'])
     operation = random.choice(config['operations'])
     
     #avoid division by zero
     if operation == '/' and num2 == 0:
         num2 = random.randint(1, config['max'])
+        
+    # check that the result is an integer for division
+    if operation == '/' and num1 % num2 != 0:
+        num1 = num2 * random.randint(1, 10)
+        
+    # check if the result is negative for subtraction
+    if operation == '-' and num1 < num2:
+        num1, num2 = num2, num1
+        
     
     problem = f'{num1} {operation} {num2}'
     
