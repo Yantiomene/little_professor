@@ -1,23 +1,23 @@
 import React, { useState } from "react";
-import { loginUser } from "../api/api";
+import { registerUser } from "../api/api";
 
-const Login = ({ setUserId }) => {
+const Register = ({ setUserId }) => {
   const [username, setUsername] = useState("");
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const user = await loginUser(username);
+      const user = await registerUser(username);
       setUserId(user.user_id);
     } catch (error) {
-      setError("Error logging in user");
+      setError("Error registering user");
     }
   };
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -32,4 +32,4 @@ const Login = ({ setUserId }) => {
   );
 };
 
-export default Login;
+export default Register;
