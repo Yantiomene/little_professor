@@ -1,26 +1,21 @@
 import React, { useState } from "react";
+import { getUser } from "../api/api";
 
-const Header = ({ onNameSubmit }) => {
-  const [name, setName] = useState("");
+const Header = ({ userId }) => {
+  const [username, setUsername] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onNameSubmit(name);
-  };
+  getUser(userId).then((user) => {
+    if (!user) {
+      return;
+    }
+    setUsername(user.username);
+  });
 
   return (
-    <header>
+    <div>
       <h1>Little Professor Game</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Enter your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <button type="submit">Start</button>
-      </form>
-    </header>
+      <p>Welcome, {username}!</p>
+    </div>
   );
 };
 
