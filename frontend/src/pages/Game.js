@@ -1,33 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MathProblem from "../components/MathProblem";
 import AnswerInput from "../components/AnswerInput";
 import Feedback from "../components/Feedback";
 import Header from "../components/Header";
+import { fetchQuestion, submitAnswer } from "../api/api";
 
-const Game = () => {
-  const [feedback, setFeedback] = useState("");
-  const [name, setName] = useState("");
-  const [problem, setProblem] = useState("5 + 3"); // This is a placeholder value
+const feedbackMessages = [
+  "Correct! You are amazing!",
+  "Correct! You are doing great!",
+  "Correct! Keep going!",
+  "Correct! You are on fire!",
+  "Correct! You are a math genius!",
+  "Correct! You are unstoppable!",
+  "Correct! You are a math wizard!",
+  "Correct! You are a math whiz!",
+  "Correct! You are a math master!",
+];
+
+const Game = ({ userId }) => {
+  const [feedback, setFeedback] = useState(null);
+  const [problem, setProblem] = useState(null);
   const [answer, setAnswer] = useState("");
 
-  const handleNameSubmit = (name) => {
-    setName(name);
-  };
+  useEffect(() => {
+    const getQuestion = async () => {
+      const question = await fetchQuestion(userId);
+      setProblem(question.problem);
+    };
+    getQuestion();
+  }, [userId]);
 
-  const handleAnswerSubmit = (answer) => {
-    if (answer === "8") {
-      setFeedback("Correct! You're a math genius, " + name + "!");
+  const handleAnswerSubmit = async (answer) => {
+    const result = await submitAnswer(userId, problem, answer);
+    if (result.correct_answer) {
+      const feedbackMessage =
+        feedbackMessages[Math.floor(Math.random() * feedbackMessages.length)];
+      setFeedback(feedbackMessage);
+      const newProblem = await fetchQuestion(userId);
+      setProblem(newProblem.problem);
     } else {
-      setFeedback("Incorrect. Try again!");
+      setFeedback("Incorrect! Try again!");
     }
   };
 
   return (
     <div>
-      <Header onNameSubmit={handleNameSubmit} />
-      <MathProblem problem={problem} />
+      <Header userId={userId} />
+      {problem && <MathProblem problem={problem} />}
       <AnswerInput onSubmit={handleAnswerSubmit} />
-      <Feedback feedback={feedback} />
+      {feedback && <Feedback feedback={feedback} />}
     </div>
   );
 };
