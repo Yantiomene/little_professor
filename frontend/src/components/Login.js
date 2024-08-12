@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { loginUser } from "../api/api";
+import { Link } from "react-router-dom";
 
 const Login = ({ setUserId }) => {
   const [username, setUsername] = useState("");
@@ -27,6 +28,9 @@ const Login = ({ setUserId }) => {
         />
         <button type="submit">Submit</button>
       </form>
+      <p>
+        Don't yet have an account? <Link to="/">Register</Link>
+      </p>
       {error && <p>{error}</p>}
     </div>
   );
