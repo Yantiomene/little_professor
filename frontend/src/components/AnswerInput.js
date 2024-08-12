@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-const AnswerInput = ({ onSubmitAnswer }) => {
+const AnswerInput = ({ onSubmit }) => {
   const [answer, setAnswer] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmitAnswer(answer);
+    onSubmit(answer);
     setAnswer("");
   };
 
