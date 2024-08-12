@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_cors import CORS
 
 
 db = SQLAlchemy()
@@ -15,6 +16,7 @@ def create_app(config_class='app.config.Config'):
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
+    CORS(app)
 
     from app import routes
     app.register_blueprint(routes.bp)
