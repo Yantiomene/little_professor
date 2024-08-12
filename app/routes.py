@@ -60,6 +60,36 @@ def logout():
     return jsonify({'message': 'User logged out successfully'})
 
 
+# Endpoint to get username of the current user
+@bp.route('/user', methods=['GET'])
+def get_user():
+    user_id = request.args.get('user_id')
+    if not user_id:
+        return jsonify({'error': 'Invalid user ID'}), 400
+    
+    user = db.session.get(User, user_id)
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+    
+    return jsonify({'username': user.username})
+
+
+# Endpoint to get the progress of the current user
+@bp.route('/progress', methods=['GET'])
+def get_progress():
+    user_id = request.args.get('user_id')
+    
+    if not user_id:
+        return jsonify({'error': 'Invalid user ID'}), 400
+    
+    progress = db.session.get(Progress, user_id)
+    
+    if not progress:
+        return jsonify({'error': 'User not found'}), 404
+    
+    return jsonify({'correct_answers': progress.correct_answers, 'incorrect_answers': progress.incorrect_answers, 'level': progress.level})
+
+
 # endpoint to get a new math problem
 @bp.route('/question', methods=['GET'])
 def get_question():
