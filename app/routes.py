@@ -19,6 +19,7 @@ def register():
     
     # check if the username is already taken
     if db.session.query(User).filter_by(username=username).first():
+        print('Register: Username already taken')
         return jsonify({'error': 'Username already taken'}), 400
     
     # create a new user and add it to the database
@@ -30,6 +31,7 @@ def register():
     db.session.add(initial_progress)
     db.session.commit()
     
+    print('Register: User created successfully {}'.format(new_user.id))
     return jsonify({'message': 'User created successfully', 'user_id': new_user.id}), 201
 
 
