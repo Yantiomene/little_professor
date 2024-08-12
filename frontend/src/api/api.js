@@ -25,6 +25,19 @@ export const loginUser = async (username) => {
   }
 };
 
+export const getUser = async (userId) => {
+  try {
+    const response = await axios.get(`${API_URL}user`, {
+      params: {
+        user_id: userId,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user:", error);
+  }
+};
+
 export const fetchQuestion = async (userId) => {
   try {
     const response = await axios.get(`${API_URL}question`, {
