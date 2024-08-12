@@ -9,7 +9,8 @@ export const registerUser = async (username) => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error registering user:", error);
+    console.error("Error registering user:", error.message);
+    return { error: error.message };
   }
 };
 
