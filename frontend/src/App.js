@@ -1,22 +1,36 @@
 import logo from "./logo.svg";
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Game from "./pages/Game";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
-function App() {
+const App = () => {
+  const [userId, setUserId] = useState(null);
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Router>
-          <Routes>
-            <Route path="/" element={<Game />} />
-          </Routes>
+          <div className="App">
+            {!userId ? (
+              <Routes>
+                <Route path="/" element={<Register setUserId={setUserId} />} />
+                <Route
+                  path="/login"
+                  element={<Login setUserId={setUserId} />}
+                />
+              </Routes>
+            ) : (
+              <Game userId={userId} />
+            )}
+          </div>
         </Router>
       </header>
     </div>
   );
-}
+};
 
 export default App;
