@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+import logo from "./logo1.svg";
 import "./App.css";
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -24,7 +24,9 @@ const App = () => {
                 />
               </Routes>
             ) : (
-              <Game userId={userId} />
+              <Routes>
+                <Route path="/login" element={<Game userId={userId} />} />
+              </Routes>
             )}
           </div>
         </Router>
