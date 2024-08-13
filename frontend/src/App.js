@@ -13,24 +13,21 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Router>
-          <div className="App">
-            {!userId ? (
-              <Routes>
-                <Route path="/" element={<Register setUserId={setUserId} />} />
-                <Route
-                  path="/login"
-                  element={<Login setUserId={setUserId} />}
-                />
-              </Routes>
-            ) : (
-              <Routes>
-                <Route path="/login" element={<Game userId={userId} />} />
-              </Routes>
-            )}
-          </div>
-        </Router>
       </header>
+      <Router>
+        <div className="App container">
+          {!userId ? (
+            <Routes>
+              <Route path="/" element={<Register setUserId={setUserId} />} />
+              <Route path="/login" element={<Login setUserId={setUserId} />} />
+            </Routes>
+          ) : (
+            <Routes>
+              <Route path="/login" element={<Game userId={userId} />} />
+            </Routes>
+          )}
+        </div>
+      </Router>
     </div>
   );
 };

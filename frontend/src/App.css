@@ -15,7 +15,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  /*min-height: 100vh;*/
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,4 +35,49 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  background-color: #b889ee;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+button {
+  font-size: 1.2em;
+  padding: 10px 20px;
+  background-color: #3b8c76;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #59a0cc;
+}
+
+input {
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.header {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
 }
