@@ -5,6 +5,7 @@ import Feedback from "../components/Feedback";
 import Header from "../components/Header";
 import { fetchQuestion, submitAnswer, getProgress } from "../api/api";
 import UserProgress from "../components/UserProgress";
+import Footer from "../components/Footer";
 
 const feedbackMessages = [
   "Correct! You are amazing!",
@@ -61,6 +62,7 @@ const Game = ({ userId }) => {
       <AnswerInput onSubmit={handleAnswerSubmit} />
       {feedback && <Feedback feedback={feedback} />}
       <UserProgress progress={progress} />
+      <Footer />
     </div>
   );
 };

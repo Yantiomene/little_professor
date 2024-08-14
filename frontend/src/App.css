@@ -209,3 +209,10 @@ input {
   color: white;
   transition: width 0.3s ease-in-out;
 }
+
+.footer {
+  font-size: 0.6em;
+  font-style: italic;
+  color: #333;
+  margin-top: 20px;
+}

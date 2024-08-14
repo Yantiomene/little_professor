@@ -34,10 +34,12 @@ const UserProgress = ({ progress }) => {
                   )}%`,
                 }}
               >
-                {Math.floor(
-                  (progress.correct_answers * 100) /
-                    (progress.correct_answers + progress.incorrect_answers)
-                )}
+                {progress.correct_answers + progress.incorrect_answers === 0
+                  ? 0
+                  : Math.floor(
+                      (progress.correct_answers * 100) /
+                        (progress.correct_answers + progress.incorrect_answers)
+                    )}
                 %
               </div>
             </div>
