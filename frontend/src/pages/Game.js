@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import { fetchQuestion, submitAnswer, getProgress } from "../api/api";
 import UserProgress from "../components/UserProgress";
 import Footer from "../components/Footer";
+import "./Game.css";
 
 const feedbackMessages = [
   "Correct! You are amazing!",
@@ -66,10 +67,18 @@ const Game = ({ userId }) => {
   return (
     <div>
       <Header className="header" userId={userId} />
-      {problem && <MathProblem className="problem" problem={problem} />}
-      <AnswerInput onSubmit={handleAnswerSubmit} />
-      {feedback && <Feedback feedback={feedback} />}
-      <UserProgress progress={progress} />
+      <div className="problem">
+        {problem && <MathProblem problem={problem} />}
+      </div>
+      <div className="answer">
+        <AnswerInput onSubmit={handleAnswerSubmit} />
+      </div>
+      <div className="ans-feedback">
+        {feedback && <Feedback feedback={feedback} />}
+      </div>
+      <div className="user-progress">
+        <UserProgress progress={progress} />
+      </div>
       <Footer />
     </div>
   );
