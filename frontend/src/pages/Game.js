@@ -11,12 +11,20 @@ const feedbackMessages = [
   "Correct! You are amazing!",
   "Correct! You are doing great!",
   "Correct! Keep going!",
+  "Correct! You are doing fantastic!",
+  "Correct! You are doing awesome!",
   "Correct! You are on fire!",
+  "Correct! You are on a roll!",
   "Correct! You are a math genius!",
   "Correct! You are unstoppable!",
   "Correct! You are a math wizard!",
   "Correct! You are a math whiz!",
   "Correct! You are a math master!",
+  "Correct! You are a math star!",
+  "Correct! You are a math champion!",
+  "Correct! You are a math expert!",
+  "Correct! You are a math pro!",
+  "Correct! You are a math guru!",
 ];
 
 const Game = ({ userId }) => {

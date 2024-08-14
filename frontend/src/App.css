@@ -58,14 +58,19 @@ button {
   font-size: 1.2em;
   padding: 10px 20px;
   background-color: #3b8c76;
+  color: white;
+  text-align: center;
   border: none;
+  text-decoration: none;
+  display: inline-block;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 button:hover {
-  background-color: #59a0cc;
+  background-color: #45a049;
+  transform: scale(1.05);
 }
 
 input {
@@ -186,6 +191,7 @@ input {
   width: 100%;
   background-color: white;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 /* Progress bar text */
@@ -200,6 +206,7 @@ input {
 .progress-bar {
   height: 20px;
   display: flex;
+  line-height: 20px;
   background-color: #3b8c76;
   border-radius: 10px;
   padding: 5px;
@@ -207,7 +214,7 @@ input {
   align-items: center;
   justify-content: center;
   color: white;
-  transition: width 0.3s ease-in-out;
+  transition: width 0.7s ease-in-out;
 }
 
 .footer {
