@@ -39,7 +39,7 @@
 
 body {
   font-family: "Comic Sans MS", "Comic Sans", cursive;
-  background-color: #b889ee;
+  background-color: #a3b0b0;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
@@ -80,4 +80,45 @@ input {
   font-size: 2em;
   color: #333;
   margin-bottom: 20px;
+}
+
+.problem {
+  font-size: 1.8em;
+  margin: 20px 0;
+  color: #444;
+}
+
+.feedback {
+  font-size: 1.5em;
+  margin-top: 20px;
+  text-align: center;
+  font-style: italic;
+}
+
+.feedback.correct {
+  color: #0b6f22;
+  animation: correctFeedback 0.5s ease-in-out;
+}
+
+.feedback.incorrect {
+  color: #930211;
+  animation: incorrectFeedback 0.5s ease-in-out;
+}
+
+@keyframes correctFeedback {
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes incorrectFeedback {
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

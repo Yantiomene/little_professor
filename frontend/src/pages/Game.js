@@ -59,7 +59,7 @@ const Game = ({ userId }) => {
     <div>
       <Header className="header" userId={userId} />
       <UserProgress progress={progress} />
-      {problem && <MathProblem problem={problem} />}
+      {problem && <MathProblem className="problem" problem={problem} />}
       <AnswerInput onSubmit={handleAnswerSubmit} />
       {feedback && <Feedback feedback={feedback} />}
     </div>
