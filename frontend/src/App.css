@@ -98,6 +98,12 @@ input {
   margin-top: 20px;
   text-align: center;
   font-style: italic;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.feedback.show {
+  opacity: 1;
 }
 
 .feedback.correct {
