@@ -50,7 +50,7 @@ const Game = ({ userId }) => {
       const newProblem = await fetchQuestion(userId);
       setProblem(newProblem.problem);
     } else {
-      setFeedback("Incorrect! Try again!");
+      setFeedback(answer + "....is incorrect! Try again!");
     }
   };
 
