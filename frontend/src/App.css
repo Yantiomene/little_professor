@@ -122,3 +122,22 @@ input {
     transform: scale(1);
   }
 }
+
+/* Progress bar container */
+.progress-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+/* The progress bar itself */
+.progress-bar {
+  height: 20px;
+  background-color: #4caf50;
+  border-radius: 10px;
+  width: 0;
+  text-align: center;
+  color: white;
+  transition: width 0.3s ease-in-out;
+}

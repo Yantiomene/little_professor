@@ -21,7 +21,6 @@ const feedbackMessages = [
 const Game = ({ userId }) => {
   const [feedback, setFeedback] = useState(null);
   const [problem, setProblem] = useState(null);
-  const [answer, setAnswer] = useState("");
   const [progress, setProgress] = useState(null);
 
   useEffect(() => {
@@ -58,10 +57,10 @@ const Game = ({ userId }) => {
   return (
     <div>
       <Header className="header" userId={userId} />
-      <UserProgress progress={progress} />
       {problem && <MathProblem className="problem" problem={problem} />}
       <AnswerInput onSubmit={handleAnswerSubmit} />
       {feedback && <Feedback feedback={feedback} />}
+      <UserProgress progress={progress} />
     </div>
   );
 };
