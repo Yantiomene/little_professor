@@ -2,10 +2,14 @@ import React, { useState } from "react";
 
 const AnswerInput = ({ onSubmit }) => {
   const [answer, setAnswer] = useState("");
+  const clickSound = new Audio(require("../assets/sounds/click.mp3"));
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(answer);
+    clickSound
+      .play()
+      .catch((error) => console.error("Error playing sound:", error));
     setAnswer("");
   };
 
