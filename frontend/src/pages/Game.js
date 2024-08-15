@@ -28,6 +28,9 @@ const feedbackMessages = [
   "Correct! You are a math guru!",
 ];
 
+const incorrectSound = new Audio(require("../assets/sounds/incorrect.wav"));
+const correctSound = new Audio(require("../assets/sounds/correct.wav"));
+
 const Game = ({ userId }) => {
   const [feedback, setFeedback] = useState(null);
   const [problem, setProblem] = useState(null);
@@ -59,8 +62,14 @@ const Game = ({ userId }) => {
       setFeedback(feedbackMessage);
       const newProblem = await fetchQuestion(userId);
       setProblem(newProblem.problem);
+      correctSound
+        .play()
+        .catch((error) => console.error("Error playing sound:", error));
     } else {
       setFeedback(answer + "....is incorrect! Try again!");
+      incorrectSound
+        .play()
+        .catch((error) => console.error("Error playing sound:", error));
     }
   };
 
